@@ -6,11 +6,11 @@
 
 ## Description
 
-This repository contains a Docker build file to create an Open Container Initiative (OCI) image containing [Gitolite](https://gitolite.com/gitolite/index.html) and an OpenSSH server. Please make sure you are familier with Gitolite and OpenSSH server.
+This repository contains a Docker build file to create an Open Container Initiative (OCI) image containing [Gitolite](https://gitolite.com/gitolite/index.html) and an OpenSSH server. Please make sure you are familier with [Gitolite](https://gitolite.com/gitolite/index.html), [OpenSSH server](https://man.openbsd.org/sshd.8), [building and publishing OCI images with Docker](https://docs.docker.com/get-started/docker-concepts/building-images/build-tag-and-publish-an-image/) and [Kubernetes](https://kubernetes.io/).
 
-This repository also contains example kubernetes [kubectl kustomize](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_kustomize/) manifest fragments to create a Gitolite instance running in a Kubernetes cluster exposed by public-key auth SSH.
+This repository also contains example Kubernetes [kubectl kustomize](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_kustomize/) manifest fragments to create a Gitolite instance running as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) in a [Kubernetes cluster](https://kubernetes.io/docs/concepts/overview/components/) accessed by public-key auth SSH.
 
-The OCI image will be useful for self-hosting your private repositories. It should be more secure than running a [bare metal server](https://en.wikipedia.org/wiki/Bare-metal_server) or [virtual machine](https://en.wikipedia.org/wiki/Virtual_machine) running Gitolite.
+The OCI image will be useful for self-hosting your private git repositories. It should be more secure than running a [bare metal server](https://en.wikipedia.org/wiki/Bare-metal_server) or [virtual machine](https://en.wikipedia.org/wiki/Virtual_machine) running Gitolite.
 
 The image could be run as a stand-alone Docker container, but I'm not interested in that.
 
