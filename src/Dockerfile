@@ -26,3 +26,7 @@ VOLUME /repositories
 EXPOSE 2222
 ENTRYPOINT ["tini", "--", "/opt/entrypoint.sh"]
 CMD ["/usr/sbin/sshd", "-D", "-e", "-f", "/sshd/sshd_config"]
+
+LABEL org.opencontainers.image.source=https://github.com/himslm01/gitolite-kubernetes
+LABEL org.opencontainers.image.description="Gitolite"
+LABEL org.opencontainers.image.licenses=MIT

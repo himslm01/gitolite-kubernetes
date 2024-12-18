@@ -14,11 +14,15 @@ The OCI image will be useful for self-hosting your private git repositories. It 
 
 The image could be run as a stand-alone Docker container, but I'm not interested in that.
 
+## Use the packaged OCI image
+
+An image has been published to GitHub's Continer registry [`ghcr.io/himslm01/gitolite:v3.6.13`](https://github.com/himslm01/gitolite-kubernetes/pkgs/container/gitolite).
+
 ## Build the OCI image
 
 The [`Dockerfile`](src/Dockerfile) and entry point shell script [`entrypoint.sh`](src/entrypoint.sh) are located in the `src` folder.
 
-I assume you'll be pushing the built OCI image to a repository, so these are the commands you'll need to run from a shell at the root of this repository.
+I assume you'll be pushing the built OCI image to a local repository, so these are the commands you'll need to run from a shell at the root of this repository.
 
 ```code
 docker build -t <your-repository>/gitolite:v3.6.13 src/
@@ -36,7 +40,7 @@ This assumes that you have persistant storage available via NFS, or something si
   popd
   ```
 * Create or copy your ssh host keys into the `ssh` folder within your newly created override folder. See below for creating ssh host keys.
-* Edit the file `kustomization.yaml` to set `your-repository` in `images/newName` to be the hostname of the repository you pushed your OCI image into
+* If you have built your own OCI image and pushed it to your repository, edit the file `kustomization.yaml` to set your repository, image name, and tag in place of the values in `images/newName` and `images/newTag`
 * Edit the file `env.properties` to set the four environment variables for:
   * `GIT_UID` the user ID that the `git` user will run as in your container
   * `GIT_GID` the group ID that the `git` user will run as in your container
