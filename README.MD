@@ -130,8 +130,8 @@ docker run \
  --env GIT_UID=1001 \
  --env GIT_GID=1001 \
  --env "GITOLITE_ADMIN_PUBKEY=ssh-rsa AAAAB3NzaC1yc2...7HSYSw0r+ANk=" \
- --env GITOLITE_ADMIN_USERNAME=mdsh \
- --mount type=bind,src=$PWD/src/etc/ssh,dst=/sshd,ro \
+ --env GITOLITE_ADMIN_USERNAME=admin \
+ --mount type=bind,src=$PWD/sshd,dst=/sshd,ro \
  --mount type=volume,src=gitolite-home,dst=/home/git \
  --mount type=volume,src=gitolite-repositories,dst=/repositories \
  --publish 2222:2222 \
@@ -147,8 +147,8 @@ docker run \
  --env GIT_UID=1001 \
  --env GIT_GID=1001 \
  --env "GITOLITE_ADMIN_PUBKEY=ssh-rsa AAAAB3NzaC1yc2...7HSYSw0r+ANk=" \
- --env GITOLITE_ADMIN_USERNAME=mdsh \
- --mount type=bind,src=$PWD/src/etc/ssh,dst=/sshd,ro \
+ --env GITOLITE_ADMIN_USERNAME=admin \
+ --mount type=bind,src=$PWD/sshd,dst=/sshd,ro \
  --mount "type=volume,dst=/repositories,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/export/git/repositories,\"volume-opt=o=addr=nas.lan,rw,nosuid,noatime\"" \
  --mount "type=volume,dst=/home/git,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/export/git/home_git,\"volume-opt=o=addr=nas.lan,rw,nosuid,noatime,\"" \
  --publish 2222:2222 \
