@@ -1,0 +1,46 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: gitolite
+
+images:
+- name: gitolite
+  newName: your-repository/gitolite
+  newTag: v3.6.13
+
+generatorOptions:
+  annotations:
+    note: generated
+  disableNameSuffixHash: true
+  labels:
+    type: generated
+
+secretGenerator:
+- name: gitolite-sshd
+  behavior: merge
+  files:
+  - ssh/ssh_host_dsa_key
+  - ssh/ssh_host_dsa_key.pub
+  - ssh/ssh_host_ecdsa_key
+  - ssh/ssh_host_ecdsa_key.pub
+  - ssh/ssh_host_ed25519_key
+  - ssh/ssh_host_ed25519_key.pub
+  - ssh/ssh_host_rsa_key
+  - ssh/ssh_host_rsa_key.pub
+
+configMapGenerator:
+- name: gitolite-env
+  envs:
+  - env.properties
+
+patches:
+- target:
+    version: v1
+    kind: Service
+    name: gitolite-sshd
+  path: service-patch.yaml
+
+resources:
+- ../../base/
+- namespace.yaml
+- persistentVolume.yaml

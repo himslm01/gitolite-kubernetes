@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: gitolite
+
+spec:
+  selector:
+    matchLabels:
+      app: gitolite
+  serviceName: "gitolite-sshd"
+  replicas: 1
+  minReadySeconds: 6
+
+  template:
+    metadata:
+      labels:
+        app: gitolite
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: gitolite
+        image: gitolite
+        ports:
+        - containerPort: 2222
+          name: sshd
+        volumeMounts:
+        - name: sshd-volume
+          mountPath: /sshd
+          readOnly: true
+        - name: gitolite-volume
+          mountPath: /home/git
+          subPath: home_git
+        - name: gitolite-volume
+          mountPath: /repositories
+          subPath: repositories
+        env:
+        - name: GIT_GID
+          valueFrom:
+            configMapKeyRef:
+              name: gitolite-env
+              key: GIT_GID
+        - name: GIT_UID
+          valueFrom:
+            configMapKeyRef:
+              name: gitolite-env
+              key: GIT_UID
+        - name: GITOLITE_ADMIN_PUBKEY
+          valueFrom:
+            configMapKeyRef:
+              name: gitolite-env
+              key: GITOLITE_ADMIN_PUBKEY
+        - name: GITOLITE_ADMIN_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: gitolite-env
+              key: GITOLITE_ADMIN_USERNAME
+      volumes:
+      - name: sshd-volume
+        secret:
+          secretName: gitolite-sshd
+      - name: gitolite-volume
+        persistentVolumeClaim:
+          claimName: gitolite-data

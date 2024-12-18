@@ -1,0 +1,17 @@
+Port 2222
+PidFile /home/git/sshd.pid
+
+HostKey /sshd/ssh_host_dsa_key
+HostKey /sshd/ssh_host_ecdsa_key
+HostKey /sshd/ssh_host_ed25519_key
+HostKey /sshd/ssh_host_rsa_key
+
+PasswordAuthentication no
+TCPKeepAlive no
+UseDNS no
+PrintMotd no
+DisableForwarding yes
+PermitRootLogin no
+PermitUserEnvironment no
+PermitTTY no
+LogLevel VERBOSE
