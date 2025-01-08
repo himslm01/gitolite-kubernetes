@@ -2,13 +2,15 @@
 
 ## Copyright
 
-(c) 2024 Mark Himsley
+(c) 2025 Mark Himsley
 
 ## Description
 
 This repository contains a Docker build file to create an Open Container Initiative (OCI) image containing Gitolite and an OpenSSH server.
 
-This repository also contains example Kubernetes [kubectl kustomize](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_kustomize/) manifest fragments to create a Gitolite instance  accessed by public-key auth SSH, running as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) in a [Kubernetes cluster](https://kubernetes.io/docs/concepts/overview/components/).
+This repository also contains example Kubernetes [kubectl kustomize](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_kustomize/) manifest fragments to create a Gitolite instance accessed by public-key auth SSH, running as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) in a [Kubernetes cluster](https://kubernetes.io/docs/concepts/overview/components/). The examples Kubernetes manifest fragments assume that some highly available NFS storage is available for storing the persistent data.
+
+![diagram of system](src/docs/gitolite-kubernetes.png)
 
 Please make sure you are familiar with [Gitolite](https://gitolite.com/gitolite/index.html), [OpenSSH server](https://man.openbsd.org/sshd.8), [building and publishing OCI images with Docker](https://docs.docker.com/get-started/docker-concepts/building-images/build-tag-and-publish-an-image/) and [Kubernetes](https://kubernetes.io/).
 
